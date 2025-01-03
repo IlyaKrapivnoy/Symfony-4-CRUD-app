@@ -9,6 +9,9 @@ class ArticleController extends AbstractController {
      * @Route("/", methods={"GET"})
      */
     public function index() {
-        return $this->render('articles/index.html.twig');
+
+        $articles = ['Art 1', 'Art 2', 'Art 3'];
+
+        return $this->render('articles/index.html.twig', array('articles' => $articles));
     }
 }
