@@ -35,6 +35,18 @@ class ArticleController extends AbstractController {
             ->add('save', SubmitType::class, array('label' => 'Create', 'attr' => array('class' => 'btn btn-primary mt-3')))
             ->getForm();
 
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $article = $form->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($article);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('article_list');
+        }
+
         return $this->render('articles/new.html.twig', array('form' => $form->createView()));
     }
 
