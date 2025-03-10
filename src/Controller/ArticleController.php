@@ -16,7 +16,7 @@ class ArticleController extends AbstractController
     /**
      * @Route("/", methods={"GET"}, name="article_list")
      */
-    public function index()
+    public function index(): Response
     {
         $articles = $this->getDoctrine()->getRepository(Article::class)->findAll();
 
@@ -55,7 +55,7 @@ class ArticleController extends AbstractController
     /**
      * @Route("/article/{id}", name="article_show")
      */
-    public function show($id)
+    public function show($id): Response
     {
         $article = $this->getDoctrine()->getRepository(Article::class)->find($id);
 
@@ -68,7 +68,6 @@ class ArticleController extends AbstractController
      */
     public function edit(Request $request, $id)
     {
-        $article = new Article();
         $article = $this->getDoctrine()->getRepository(Article::class)->find($id);
 
         $form = $this->createFormBuilder($article)
